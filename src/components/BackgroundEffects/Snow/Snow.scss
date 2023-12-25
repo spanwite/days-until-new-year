@@ -3,9 +3,8 @@
 $d: 20; // density
 $w: 600; // grid size
 $s: 3s; // speed
-
-// Generate the snow image using radial gradients
 $grad: ();
+
 @for $i from 0 to $d {
 	$v: random(4) + 2;
 	$a: random(5) * 0.1 + 0.5;
@@ -17,7 +16,6 @@ $grad: ();
 		) !global;
 }
 
-// The CSS
 .snow,
 .snow:before,
 .snow:after {
@@ -32,6 +30,7 @@ $grad: ();
 	animation: snow $s linear infinite;
 	content: '';
 }
+
 .snow:after {
 	margin-left: math.div(-$w, 3) + px;
 	opacity: 0.4;
@@ -39,6 +38,7 @@ $grad: ();
 	animation-direction: reverse;
 	filter: blur(3px);
 }
+
 .snow:before {
 	animation-duration: $s * 3;
 	animation-direction: reverse;
@@ -46,6 +46,7 @@ $grad: ();
 	opacity: 0.65;
 	filter: blur(1.5px);
 }
+
 @keyframes snow {
 	to {
 		transform: translateY($w + px);

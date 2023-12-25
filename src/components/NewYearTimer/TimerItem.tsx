@@ -9,9 +9,9 @@ interface TimerItemProps {
 
 export const TimerItem: FC<TimerItemProps> = ({ Value, TimeUnit }) => {
 	return (
-		<div className='w-24 py-2 rounded-md bg-tablet'>
-			<strong className='text-5xl'>{Value}</strong>
-			<div className='text-2xl'>{getTimeUnitLabel(Value, TimeUnit)}</div>
+		<div className='w-24'>
+			<strong className='text-7xl'>{Value}</strong>
+			<div className='text-3xl'>{getTimeUnitLabel(Value, TimeUnit)}</div>
 		</div>
 	);
 };

@@ -1,19 +1,32 @@
-import { FC } from 'react';
+import { FC, useEffect, useState } from 'react';
 import './App.css';
-import { ShootingStars } from './components/ShootingStars/ShootingStars';
-import { Snow } from './components/Snow/Snow';
-import { Timer } from './components/Timer/Timer';
+import { BackgroundEffects } from './components/BackgroundEffects/BackgroundEffects';
+import { NewYearTimer } from './components/NewYearTimer/NewYearTimer';
+import { getDaysUntilNewYear } from './utils/getDaysUntilNewYear';
+import { getNewYearStatus } from './utils/getNewYearStatus';
 
 export const App: FC = () => {
+	const [isNewYear, setIsNewYear] = useState(getNewYearStatus);
+	const [daysUntilNewYear, setDaysUntilNewYear] = useState(getDaysUntilNewYear);
+
+	useEffect(() => {
+		const interval = setInterval(() => {
+			if (getNewYearStatus()) {
+				setIsNewYear(true);
+				clearInterval(interval);
+			}
+
+			setDaysUntilNewYear(getDaysUntilNewYear());
+		}, 1000);
+		return () => clearInterval(interval);
+	}, [isNewYear]);
+
 	return (
 		<div>
-			<ShootingStars />
-			<Snow />
-			<p className='text-3xl mb-3'>До нового года осталось:</p>
-			<Timer />
+			<BackgroundEffects />
+			{!isNewYear && <NewYearTimer daysUntilNewYear={daysUntilNewYear} />}
 		</div>
 	);
 };
 
-// https://codemyui.com/shooting-star-background-in-pure-css/
 // https://codepen.io/pehaa/pen/WNKNVKP -- snow globe
